@@ -45,7 +45,7 @@ namespace GridSystem
                 }
             }
         }
-        
+
         /// <summary>
         /// Calculates cell position for specific coordinate.
         /// </summary>
@@ -86,6 +86,23 @@ namespace GridSystem
         public Cell GetCell(int x, int y)
         {
             return grid[x, y];
+        }
+
+        public Cell GetClosestCell(Vector3 point)
+        {
+            Cell closestCell = null;
+            float closestDistance = Mathf.Infinity;
+            foreach (var cell in grid)
+            {
+                var distance = Vector3.Distance(point, cell.Position);
+                if (distance < closestDistance)
+                {
+                    closestCell = cell;
+                    closestDistance = distance;
+                }
+            }
+
+            return closestCell;
         }
 
         #endregion

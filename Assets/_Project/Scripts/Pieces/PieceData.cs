@@ -6,4 +6,6 @@ public class PieceData
 {
     public Vector3[] vertices;
     public int[] triangles;
+    public Vector3 origin;
+    public Color color;
 }

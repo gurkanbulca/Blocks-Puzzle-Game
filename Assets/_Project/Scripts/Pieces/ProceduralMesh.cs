@@ -1,25 +1,36 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 public class ProceduralMesh : MonoBehaviour
 {
-    [SerializeField] private Vector3[] vertices;
-    [SerializeField] private int[] triangles;
-
+    private PieceData _pieceData;
     private Mesh _mesh;
+
     private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
 
-    private void Awake()
+
+    public void Initialize(PieceData pieceData, bool applyOrigin = false)
     {
-        GenerateTestMeshData();
-        Initialize(vertices, triangles, Color.yellow);
+        _pieceData = pieceData;
+        if (applyOrigin)
+            _pieceData.vertices = _pieceData.vertices.Select(vertex => vertex - _pieceData.origin).ToArray();
+
+        GenerateMesh(pieceData.vertices, pieceData.triangles);
+        SetMeshColor(pieceData.color);
     }
 
-    public void Initialize(Vector3[] vertices, int[] triangles, Color color)
+    private Vector3 CalculateOrigin(Vector3[] vertices)
     {
-        GenerateMesh(vertices, triangles);
-        SetMeshColor(color);
+        var origin = Vector3.zero;
+        foreach (var vertex in vertices)
+        {
+            origin += vertex;
+        }
+
+        origin /= vertices.Length;
+        return origin;
     }
 
     private void SetMeshColor(Color color)
@@ -35,17 +46,5 @@ public class ProceduralMesh : MonoBehaviour
         GetComponent<MeshFilter>().mesh = _mesh;
         _mesh.vertices = vertices;
         _mesh.triangles = triangles;
-    }
-
-    private void GenerateTestMeshData()
-    {
-        vertices = new[]
-        {
-            new Vector3(-.5f, .5f, 0),
-            new Vector3(.5f, -.5f, 0),
-            new Vector3(-.5f, -.5f, 0),
-            new Vector3(.5f, .5f, 0)
-        };
-        triangles = new[] {0, 1, 2, 0, 3, 1};
     }
 }
