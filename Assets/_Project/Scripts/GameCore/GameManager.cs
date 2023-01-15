@@ -21,6 +21,7 @@ namespace GameCore
         private CameraController _cameraController;
         private GameStateController _gameStateController;
         private int _placedPieceCount;
+        private int _levelIndex;
 
         public int CurrentLevelIndex => LevelController.CurrentLevelIndex;
         public string CurrentLevelDifficulty => _levelData.levelDifficulty.ToString();
@@ -34,7 +35,7 @@ namespace GameCore
 
         private void Start()
         {
-            LoadRandomLevel();
+            LoadNextLevel();
         }
 
         private void Update()
@@ -42,10 +43,10 @@ namespace GameCore
             _inputController.Tick();
         }
 
-        private void LoadRandomLevel()
+        private void LoadNextLevel()
         {
             _placedPieceCount = 0;
-            _levelData = LevelController.GetRandomLevelData();
+            _levelData = LevelController.GetLevelData(_levelIndex++);
             CreateGrid(_levelData);
             _cameraController = new CameraController(Camera.main);
             _cameraController.SetCameraPosition(_levelData.gridSize);
@@ -151,7 +152,7 @@ namespace GameCore
 
         public void CompleteLevel()
         {
-            LoadRandomLevel();
+            LoadNextLevel();
         }
     }
 }

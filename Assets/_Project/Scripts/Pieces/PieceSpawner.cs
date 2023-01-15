@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -20,6 +21,7 @@ namespace Pieces
         {
             _cam = Camera.main;
             _colors = ColorUtils.GetColors();
+            _colors.Reverse();
         }
 
 

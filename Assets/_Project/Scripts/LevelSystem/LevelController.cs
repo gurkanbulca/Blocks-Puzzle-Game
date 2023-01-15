@@ -4,17 +4,14 @@ namespace LevelSystem
 {
     public static class LevelController
     {
-        public static int CurrentLevelIndex { get; private set; } = -1;
+        public static int CurrentLevelIndex { get; private set; }
 
-        public static LevelData GetRandomLevelData()
+        public static LevelData GetLevelData(int index)
         {
             var levels = Resources.LoadAll("Levels");
-            CurrentLevelIndex = Random.Range(0, levels.Length);
+            CurrentLevelIndex = index;
             var levelText = levels[CurrentLevelIndex] as TextAsset;
-            if (!levelText)
-                return null;
-
-            return JsonUtility.FromJson<LevelData>(levelText.text);
+            return !levelText ? null : JsonUtility.FromJson<LevelData>(levelText.text);
         }
     }
 }
