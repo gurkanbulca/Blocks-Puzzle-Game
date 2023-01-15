@@ -14,7 +14,7 @@ namespace CameraSystem
 
         public void SetCameraPosition(Vector2Int gridSize)
         {
-            _cam.orthographicSize = Mathf.Max(gridSize.x, gridSize.y);
+            _cam.orthographicSize = Mathf.Max(gridSize.x, gridSize.y) + 1;
             var camTransform = _cam.transform;
             camTransform.position = camTransform.position.WithY(-1 * (gridSize.y - 4));
         }
