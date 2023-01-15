@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public static class LevelController
+namespace LevelSystem
 {
-    public static int CurrentLevelIndex { get; private set; } = -1;
-
-    public static LevelData GetRandomLevelData()
+    public static class LevelController
     {
-        var levels = Resources.LoadAll("Levels");
-        CurrentLevelIndex = Random.Range(0, levels.Length);
-        var levelText = levels[CurrentLevelIndex] as TextAsset;
-        if (!levelText)
-            return null;
+        public static int CurrentLevelIndex { get; private set; } = -1;
 
-        return JsonUtility.FromJson<LevelData>(levelText.text);
+        public static LevelData GetRandomLevelData()
+        {
+            var levels = Resources.LoadAll("Levels");
+            CurrentLevelIndex = Random.Range(0, levels.Length);
+            var levelText = levels[CurrentLevelIndex] as TextAsset;
+            if (!levelText)
+                return null;
+
+            return JsonUtility.FromJson<LevelData>(levelText.text);
+        }
     }
 }

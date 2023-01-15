@@ -5,19 +5,11 @@ namespace GameStateSystem
 {
     public class GameStateController
     {
-        #region Actions
-
         public static event Action<GameState> OnCurrentGameStateChanged = delegate { };
 
-        #endregion
-
-        #region Private Fields
 
         private GameState _currentGameState;
 
-        #endregion
-
-        #region Properties
 
         public GameState CurrentGameState
         {
@@ -36,16 +28,11 @@ namespace GameStateSystem
             }
         }
 
-        #endregion
-
-        #region Constructor
 
         public GameStateController(GameState initialState)
         {
             _currentGameState = initialState;
             OnCurrentGameStateChanged(initialState);
         }
-
-        #endregion
     }
 }

@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Extensions;
 using UnityEngine;
+using Utils;
 
 namespace GridSystem
 {

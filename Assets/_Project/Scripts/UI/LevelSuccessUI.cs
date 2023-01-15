@@ -1,21 +1,24 @@
-﻿using System;
+﻿using GameCore;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelSuccessUI : MonoBehaviour
+namespace UI
 {
-    private Button _button;
-    private GameManager _gameManager;
-
-    private void Awake()
+    public class LevelSuccessUI : MonoBehaviour
     {
-        _button = GetComponentInChildren<Button>();
-        _button.onClick.AddListener(HandleButtonClick);
-        _gameManager = FindObjectOfType<GameManager>();
-    }
+        private Button _button;
+        private GameManager _gameManager;
 
-    private void HandleButtonClick()
-    {
-        _gameManager.CompleteLevel();
+        private void Awake()
+        {
+            _button = GetComponentInChildren<Button>();
+            _button.onClick.AddListener(HandleButtonClick);
+            _gameManager = FindObjectOfType<GameManager>();
+        }
+
+        private void HandleButtonClick()
+        {
+            _gameManager.CompleteLevel();
+        }
     }
 }
