@@ -105,6 +105,14 @@ namespace GridSystem
             return closestCell;
         }
 
+        public bool IsPointInGridBorders(Vector3 point)
+        {
+            return point.x >= grid[0, 0].Position.x - .5f
+                   && point.x <= grid[grid.GetLength(0) - 1, 0].Position.x + .5f
+                   && point.y >= grid[0, grid.GetLength(1) - 1].Position.y - .5f
+                   && point.y <= grid[0, 0].Position.y + .5f;
+        }
+
         #endregion
     }
 }

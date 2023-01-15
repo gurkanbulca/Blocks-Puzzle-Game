@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class LevelController : MonoBehaviour
+public static class LevelController
 {
-    public static LevelData GetRandomLevelData(LevelDifficulty difficulty)
+    public static int CurrentLevelIndex { get; private set; } = -1;
+
+    public static LevelData GetRandomLevelData()
     {
         var levels = Resources.LoadAll("Levels");
-        var levelText = levels[Random.Range(0, levels.Length)] as TextAsset;
+        CurrentLevelIndex = Random.Range(0, levels.Length);
+        var levelText = levels[CurrentLevelIndex] as TextAsset;
         if (!levelText)
             return null;
 

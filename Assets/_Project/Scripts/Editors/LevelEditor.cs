@@ -185,10 +185,8 @@ public class LevelEditor : OdinEditor
         }
 
         _levelCreator.pieces = pieces;
-        Debug.Log("Saving in progress...");
         _levelCreator.Save();
         AssetDatabase.Refresh();
-        Debug.Log("SAVE COMPLETED!");
     }
 
     private void CreateShape()
@@ -266,8 +264,9 @@ public class LevelEditor : OdinEditor
             Handles.DrawPolyLine(_selectedTri.Points.Concat(new[] {_selectedTri.Points[0]}).ToArray());
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _shapes = new List<Shape>();
         _levelCreator = target as LevelCreator;
         while (_levelCreator.transform.childCount > 0)

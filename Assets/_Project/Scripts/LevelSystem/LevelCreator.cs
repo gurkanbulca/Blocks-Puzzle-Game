@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LevelCreator : MonoBehaviour
 {
-    [Space] [SerializeField] private ProceduralMesh meshPrefab;
+    [Space] [SerializeField] private Piece meshPrefab;
 
 
     [PropertyOrder(-3)] [SerializeField] private LevelDifficulty difficulty;
@@ -127,7 +127,7 @@ public class LevelCreator : MonoBehaviour
             triangles = new[] {0, 1, 2},
             color = color
         };
-        proceduralMesh.Initialize(pieceData);
+        proceduralMesh.Initialize(pieceData, transform.position);
     }
 
     public void DestroyMeshVisualizer(int shapeIndex, int triIndex)
